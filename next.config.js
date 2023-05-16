@@ -6,7 +6,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "www.poke-api.online",
-        // port: "4000",
         pathname: "/images/**",
       },
     ],
