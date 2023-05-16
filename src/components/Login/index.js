@@ -6,14 +6,58 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import CreateIcon from "@mui/icons-material/Create";
 import LoginIcon from "@mui/icons-material/Login";
 import LockResetIcon from "@mui/icons-material/LockReset";
 
+import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+
+      const status = await signIn("credentials", {
+        redirect: false,
+        email: email,
+        password: password,
+        callbackUrl: "/",
+      });
+
+      if (status.error) {
+        reset();
+        toast.error("เข้าสู่ระบบล้มเหลว");
+        setLoading(false);
+        return;
+      } else {
+        router.replace("/");
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error("เข้าสู่ระบบล้มเหลว");
+      reset();
+    }
+  };
+
+  const reset = () => {
+    setEmail("");
+    setPassword("");
+  };
+
+  const redirectTo = (url) => {
+    router.push(url);
+  };
   return (
-    <Grid container>
+    <Grid container className="mb-5">
       <Grid
         item
         xs={12}
@@ -28,6 +72,7 @@ const Login = () => {
             โปรดดำเนินการต่อโดยคลิกปุ่มต่อไปนี้เพื่อดำเนินการลงทะเบียนครั้งแรกต่อไป
           </Typography>
           <Button
+            onClick={() => redirectTo(`/create-an-account`)}
             startIcon={<CreateIcon />}
             className="bg-gray-600 text-white hover:bg-gray-700 w-[100%] sm:w-[50%] md:w-[60%] my-10"
           >
@@ -48,7 +93,11 @@ const Login = () => {
               <TextField
                 className="mb-5 md:max-w-[300px] w-[100%]"
                 placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 size="small"
+                type="email"
+                name="email"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -64,6 +113,9 @@ const Login = () => {
               <TextField
                 placeholder="Password"
                 size="small"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="md:max-w-[300px] w-[100%]"
                 InputProps={{
                   endAdornment: (
@@ -81,23 +133,25 @@ const Login = () => {
           {/* Butons */}
           <Box className="w-[100%] md:w-[300px] flex flex-col items-center md:items-start justify-center">
             <Button
+              disabled={loading ? true : false}
+              onClick={handleLogin}
               startIcon={<LoginIcon />}
-              className="bg-gray-600 md:max-w-[300px] text-white hover:bg-gray-700 w-[100%]  my-5"
+              className="bg-red-600 hover:bg-red-700 md:max-w-[300px] disabled:bg-gray-400 text-white w-[100%]  my-5"
             >
               เข้าสู่ระบบ
             </Button>
 
-            <Box className="w-[100%]">
+            {/* <Box className="w-[100%]">
               <Typography className="text-center font-thin text-gray-500">
                 or
               </Typography>
-            </Box>
-            <Button
+            </Box> */}
+            {/* <Button
               startIcon={<LockResetIcon />}
               className=" bg-red-600 hover:bg-red-700  hover:outline md:max-w-[300px] text-white  w-[100%] my-5"
             >
               RESET รหัสผ่าน
-            </Button>
+            </Button> */}
           </Box>
         </Box>
       </Grid>

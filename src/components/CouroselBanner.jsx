@@ -24,13 +24,8 @@ const responsive = {
   },
 };
 
-const imagesSlide = [
-  "https://www.potownstore.com/assets/images/PoTown-Banner_Web_Scarlet.jpeg",
-  "https://www.potownstore.com/assets/images/potownstore-available.jpg",
-  "https://www.potownstore.com/assets/images/BANNER-min.jpg",
-];
-
-const CouroselBanner = () => {
+const CouroselBanner = ({ bannerList }) => {
+  const getStaticURL = (url) => process.env.NEXT_PUBLIC_BACKEND_DOMAIN + url;
   return (
     <Carousel
       additionalTransfrom={0}
@@ -42,7 +37,7 @@ const CouroselBanner = () => {
       dotListClass=""
       draggable
       focusOnSelect={false}
-      infinite
+      // infinite
       itemClass=""
       keyBoardControl
       minimumTouchDrag={80}
@@ -52,8 +47,13 @@ const CouroselBanner = () => {
       renderDotsOutside={false}
       responsive={responsive}
     >
-      {imagesSlide.map((image, index) => (
-        <img src={image} className="w-full" key={index} />
+      {bannerList?.map((banner, index) => (
+        <img
+          src={getStaticURL(banner.image)}
+          alt="Banner Image"
+          className="w-full"
+          key={index}
+        />
       ))}
     </Carousel>
   );

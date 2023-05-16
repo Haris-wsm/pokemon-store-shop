@@ -1,0 +1,29 @@
+import { z } from "zod";
+
+export const validationSchema = z
+  .object({
+    email: z
+      .string({ required_error: "อีเมลจำเป็น" })
+      .min(1, { message: "อีเมลจำเป็น" })
+      .email({ message: "อีเมลไม่ถูกต้อง" }),
+    confirmEmail: z
+      .string({ required_error: "อีเมลจำเป็น" })
+      .email({ message: "อีเมลไม่ถูกต้อง" }),
+
+    name: z
+      .string({ required_error: "ชื่อจำเป็น" })
+      .min(1, { message: "ชื่อความยาวอย่างน้อย 1 อักขระ" }),
+    lastname: z
+      .string({ required_error: "นามสกุล" })
+      .min(1, { message: "นามสกุลความยาวอย่างน้อย 1 อักขระ" }),
+    address: z.string(),
+    city: z.string().optional(),
+    zip: z.string().optional(),
+    province: z.string().optional(),
+    amphoe: z.string().optional(),
+    district: z.string().optional(),
+  })
+  .refine((data) => data.email === data.confirmEmail, {
+    message: "อีเมลไม่ถูกต้อง",
+    path: ["confirmEmail"],
+  });

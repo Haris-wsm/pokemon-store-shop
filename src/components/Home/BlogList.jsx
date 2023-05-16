@@ -3,10 +3,10 @@ import React from "react";
 import Blog from "./Blog";
 import { blogs } from "@/data/blog";
 
-const BlogList = () => {
+const BlogList = ({ newBlog }) => {
   return (
     <Grid container className="mt-10 mb-20">
-      {blogs.map((blog, i) => (
+      {newBlog?.map((blog, i) => (
         <Grid item xs={12} sm={6} md={6} lg={4} key={i} className="mb-5">
           <Blog {...blog} />
         </Grid>

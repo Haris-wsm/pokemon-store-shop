@@ -6,33 +6,45 @@ import RemoveIcon from "@mui/icons-material/Remove";
 const ProductIncBtn = (props) => {
   const [total, setTotal] = useState(1);
 
+  const stock = props.stock || props.unused;
+
   const handleChange = (e) => {
     const { value } = e.target;
 
     if (value < 1) {
       setTotal(1);
+      props.handleAddQuntity(1);
       return;
     }
 
-    if (Number(value) > Number(props.stock)) {
-      setTotal(props.stock);
+    if (Number(value) > Number(stock)) {
+      setTotal(stock);
+      props.handleAddQuntity(stock);
       return;
     }
 
-    setTotal(e.target.value);
+    setTotal(value);
+    props.handleAddQuntity(value);
   };
 
   const handleAdd = () => {
-    if (total < props.stock) setTotal(total + 1);
+    if (total < stock) {
+      setTotal(total + 1);
+      props.handleAddQuntity(total + 1);
+    }
   };
 
   const handleRemove = () => {
-    if (total > 1) setTotal(total - 1);
+    if (total > 1) {
+      setTotal(total - 1);
+      props.handleAddQuntity(total - 1);
+    }
   };
 
   const handleCompleteOut = () => {
     if (!total) {
       setTotal(1);
+      props.handleAddQuntity(1);
     }
   };
 

@@ -5,15 +5,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "potown.b-cdn.net",
-        port: "",
-        pathname: "/assets/images/thumbnails/**",
-      },
-      {
-        protocol: "https",
-        hostname: "www.potownstore.com",
-        port: "",
-        pathname: "/assets/images/blog/**",
+        hostname: "www.poke-api.online",
+        // port: "4000",
+        pathname: "/images/**",
       },
     ],
   },

@@ -1,31 +1,38 @@
-import NavbarBreadcrumb from "@/components/NavbarBreadcrumb";
-import { categories } from "@/data/products";
-import { Box, Divider, List, ListItem, Typography } from "@mui/material";
+import PageLayout from "@/components/Layouts/PageLayout";
+import ApiReq from "@/utils/axios";
+import { Box, List, ListItem } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 
-const CategoryIndex = () => {
-  return (
-    <Box className="container-wrapper">
-      <Box className="xs:w-[100%] md:w-4/5 lg:w-4/5 mx-auto">
-        <NavbarBreadcrumb />
-        <Typography className="text-3xl font-semibold mt-5 mb-2">
-          STORE - CATEGORY INDEX
-        </Typography>
-        <Box className="mb-7">
-          <Divider className="relative" />
-          <Divider className="absolute bg-black w-[5%]" />
-        </Box>
+export async function getServerSideProps() {
+  const resposne = await ApiReq.get("/api/categories");
 
-        {/* Mocking Cats */}
-        <Box className="pl-3">
-          <List className="font-sans text-sm cursor-pointer text-gray-700">
-            {categories.map((cat, i) => (
-              <ListItem className="hover:underline">{cat}</ListItem>
-            ))}
-          </List>
-        </Box>
+  const error = resposne.data.ok ? false : resposne.data.message;
+
+  return { props: { error, categories: resposne.data.data } };
+}
+
+const CategoryIndex = (props) => {
+  const router = useRouter();
+
+  const redirectTo = (url) => {
+    router.push(url);
+  };
+  return (
+    <PageLayout title="STORE - CATEGORY INDEX">
+      <Box className="pl-3 pb-5 min-h-[500px]">
+        <List className="font-sans text-sm cursor-pointer text-gray-700">
+          {props.categories.map((category, i) => (
+            <ListItem
+              className="hover:underline"
+              onClick={() => redirectTo(`/${category.name}`)}
+            >
+              {category.name}
+            </ListItem>
+          ))}
+        </List>
       </Box>
-    </Box>
+    </PageLayout>
   );
 };
 

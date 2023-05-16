@@ -14,6 +14,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CartIcon from "@mui/icons-material/LocalMall";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import { useCart } from "@/atom/cartState";
 
 const NavbarWrapper = styled(Box)(({ theme }) => ({}));
 const Navbar = styled(Box)(({ theme }) => ({}));
@@ -24,7 +26,7 @@ const menus = [
   { name: "About Us", link: "/about-us" },
   { name: "My Account", link: "/my-account" },
   { name: "Contact Us", link: "/contact-us" },
-  { name: "Blog  ", link: "/" },
+  { name: "Blog  ", link: "/blog-home" },
 ];
 
 const Toolbar = () => {
@@ -37,6 +39,9 @@ const Toolbar = () => {
     setOpenDrawer(false);
     router.push(path);
   };
+
+  const [cartItem, setCartItem] = useCart();
+
   return (
     <>
       {/* Desktop Navbar */}
@@ -59,9 +64,19 @@ const Toolbar = () => {
             <MenuIcon onClick={() => setOpenDrawer(true)} />
             <Typography className="text-xs text-gray-500">MENU</Typography>
           </Box>
-          <Box>LOGO</Box>
           <Box>
-            <CartIcon />
+            <Image alt="logo" src="/logo.jpg" width={40} height={40} />
+          </Box>
+          <Box>
+            <Link href="/view-cart">
+              <CartIcon className="relative" />
+              {cartItem.length > 0 ? (
+                <Box className="absolute w-[10px] h-[10px] top-2 right-5 p-1 text-center rounded-full bg-red-500 text-white text-xs font-sans"></Box>
+              ) : (
+                <></>
+              )}
+            </Link>
+
             <Typography className="text-xs text-gray-500">CART</Typography>
           </Box>
         </Box>
@@ -96,7 +111,9 @@ const Toolbar = () => {
                 Contact Us
               </ListItem>
               <Divider className="bg-white" />
-              <ListItem>Blog</ListItem>
+              <ListItem onClick={() => handleNavigate("/blog-home")}>
+                Blog
+              </ListItem>
               <Divider className="bg-white" />
             </List>
           </Box>

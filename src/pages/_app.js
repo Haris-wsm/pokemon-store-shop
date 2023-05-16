@@ -1,20 +1,30 @@
 import "@/styles/globals.css";
-import theme from "@/utils/Theme";
-import { ThemeProvider } from "@mui/material/styles";
-import { StyledEngineProvider } from "@mui/material";
 import MainLayout from "@/components/Layouts/MainLayout";
 
 // Carousel
 import "react-multi-carousel/lib/styles.css";
+import Provider from "@/components/Provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function App({ Component, pageProps }) {
+import { SessionProvider } from "next-auth/react";
+
+import { RecoilEnv } from "recoil";
+
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
+  RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
+    <Provider>
+      <SessionProvider session={session}>
         <MainLayout>
           <Component {...pageProps} />
+          <ToastContainer position="bottom-left" />
         </MainLayout>
-      </ThemeProvider>
-    </StyledEngineProvider>
+      </SessionProvider>
+    </Provider>
   );
 }

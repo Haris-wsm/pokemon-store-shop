@@ -9,8 +9,8 @@ import {
 import React from "react";
 import { useState } from "react";
 
-const ProductSelect = () => {
-  const [selected, setSelected] = useState(50);
+const ProductSelect = (props) => {
+  const [selected, setSelected] = useState(props.total || 50);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -26,7 +26,7 @@ const ProductSelect = () => {
             id: "uncontrolled-native",
           }}
           onChange={handleChange}
-          className="w-[65px]"
+          className="w-[65px] text-sm"
         >
           <option value={50}>50</option>
           <option value={100}>100</option>

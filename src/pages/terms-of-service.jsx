@@ -1,28 +1,25 @@
-import NavbarBreadcrumb from "@/components/NavbarBreadcrumb";
-import { Box, Divider, Typography } from "@mui/material";
+import PageLayout from "@/components/Layouts/PageLayout";
+import ApiReq from "@/utils/axios";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 
-const TermsOfService = () => {
+export async function getServerSideProps() {
+  const resposne = await ApiReq.get("/api/website/termofservice");
+
+  const error = resposne.data.ok ? false : resposne.data.message;
+
+  return { props: { error, content: resposne.data.data } };
+}
+
+const TermsOfService = (props) => {
   return (
-    <Box className="container-wrapper">
-      <Box className="xs:w-[100%] md:w-4/5 lg:w-4/5 mx-auto">
-        <NavbarBreadcrumb />
-        <Typography className="text-3xl font-semibold mt-5 mb-2">
-          TERMS OF SERVICE
-        </Typography>
-        <Box className="mb-7">
-          <Divider className="relative" />
-          <Divider className="absolute bg-black w-[5%]" />
+    <PageLayout title="TERMS OF SERVICE">
+      <Box className="pb-5 min-h-[500px]">
+        <Box className="font-[Prompt] space-y-3 text-slate-700 px-3">
+          <div dangerouslySetInnerHTML={{ __html: props?.content?.raw_html }} />
         </Box>
-
-        {/* Mocking Text */}
-
-        <Typography variant="body1" className="text-sm text-gray-700">
-          This website is operated by CCGCastle, LLC. CCGCastle, LLC is
-          registered at 2 Craftsman Road, East Windsor, CT 06088, United States.
-        </Typography>
       </Box>
-    </Box>
+    </PageLayout>
   );
 };
 

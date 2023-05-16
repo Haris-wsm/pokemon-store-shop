@@ -1,4 +1,4 @@
-import { Grid, List, ListItem } from "@mui/material";
+import { Box, Grid, List, ListItem } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 
@@ -10,8 +10,10 @@ const TermOfServices = () => {
       className="font-sans text-gray-500 font-semibold"
     >
       <Grid item>
-        <List className="cursor-pointer">
-          <ListItem>Blog</ListItem>
+        <List>
+          <Link href="/blog-home">
+            <ListItem>Blog</ListItem>
+          </Link>
           <Link href="/terms-of-service">
             <ListItem>Terms of Service</ListItem>
           </Link>
@@ -21,7 +23,7 @@ const TermOfServices = () => {
         </List>
       </Grid>
       <Grid item>
-        <List className="cursor-pointer">
+        <List>
           <Link href="/privacy-policy">
             <ListItem>Privacy Policy</ListItem>
           </Link>

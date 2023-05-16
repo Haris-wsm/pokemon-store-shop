@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import NavbarBreadcrumb from "@/components/NavbarBreadcrumb";
 import RegisterForm from "@/components/RegisterForm";
+import { withNoAuth } from "@/utils/auth";
 
 const RegisterAccount = () => {
   return (
@@ -31,5 +32,9 @@ const RegisterAccount = () => {
     </Box>
   );
 };
+
+export const getServerSideProps = withNoAuth((context) => {
+  return { props: {} };
+});
 
 export default RegisterAccount;

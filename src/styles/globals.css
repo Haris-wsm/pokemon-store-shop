@@ -85,6 +85,7 @@ a {
   text-decoration: none;
 }
 
+/* Custom Carousel */
 .category.react-multi-carousel-list {
   position: unset !important;
 }
@@ -94,4 +95,97 @@ a {
 
 .category .react-multiple-carousel__arrow--right {
   right: calc(8% + 1px) !important;
+}
+
+/* React Quill Css custom */
+.ql-editor {
+  max-height: 700px;
+}
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-size-small {
+  font-size: 12px;
+}
+
+.ql-size-large {
+  font-size: 24px;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  font-size: 1em !important;
+}
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+  font-size: 1em !important;
+}
+
+blockquote {
+  border-left: 4px solid #ccc;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 16px;
+}
+
+.ql-editor.ql-blank,
+.ql-editor {
+  min-height: 200px;
+}
+
+.ql-tooltip.ql-editing {
+  z-index: 5000;
+}
+
+/* Set dropdown font-families */
+#toolbar-container .ql-font span[data-label="arial"]::before {
+  font-family: "Arial";
+}
+#toolbar-container .ql-font span[data-label="comic-sans"]::before {
+  font-family: "Comic-sans";
+}
+#toolbar-container .ql-font span[data-label="courier-new"]::before {
+  font-family: "Courier-new";
+}
+#toolbar-container .ql-font span[data-label="georgia"]::before {
+  font-family: "Georgia";
+}
+#toolbar-container .ql-font span[data-label="helvetica"]::before {
+  font-family: "Helvetica";
+}
+#toolbar-container .ql-font span[data-label="lucida"]::before {
+  font-family: "Lucida";
+}
+#toolbar-container .ql-font span[data-label="prompt"]::before {
+  font-family: "Prompt";
+}
+
+/* Set content font-families */
+.ql-font-arial {
+  font-family: "Arial";
+}
+.ql-font-comic-sans {
+  font-family: "Comic-sans";
+}
+.ql-font-courier-new {
+  font-family: "Courier-new";
+}
+.ql-font-georgia {
+  font-family: "Georgia";
+}
+.ql-font-helvetica {
+  font-family: "Helvetica";
+}
+.ql-font-lucida {
+  font-family: "Lucida";
+}
+.ql-font-prompt {
+  font-family: "Prompt";
+}
+
+ul {
+  padding-left: 2em;
 }

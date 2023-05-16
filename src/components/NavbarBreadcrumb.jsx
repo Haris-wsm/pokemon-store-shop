@@ -50,7 +50,11 @@ const NavbarBreadcrumb = () => {
 
 function Crumb({ text, href, last = false }) {
   if (last) {
-    return <Typography className="text-gray-700 text-sm">{text}</Typography>;
+    return (
+      <Typography className="text-gray-700 text-sm">
+        {decodeURI(text)}
+      </Typography>
+    );
   }
 
   return (

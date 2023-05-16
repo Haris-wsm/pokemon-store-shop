@@ -8,24 +8,41 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const options = [
   { label: "ค่าเริ่มต้น", value: "" },
-  { label: "ราคา: น้อย -> มาก", value: "price=asc" },
-  { label: "ราคา: มาก -> น้อย", value: "price=desc" },
-  { label: "ชื่อสินค้า", value: "order=name" },
-  { label: "สินค้าล่าสุด", value: "order=newest" },
-  { label: "สินค้าลดราคา", value: "order=onsale" },
+  { label: "ราคา: น้อย -> มาก", value: "minprice" },
+  { label: "ราคา: มาก -> น้อย", value: "maxprice" },
+  { label: "ชื่อสินค้า", value: "name" },
+  { label: "สินค้าล่าสุด", value: "newest" },
+  { label: "สินค้าลดราคา", value: "onsale" },
 ];
 
 const ProductByCategory = (props) => {
   const [sortedOption, setSortedOption] = useState(options[0].value);
-  const handleChangeSortedOption = (e) => setSortedOption(e.target.value);
+
+  const handleChangeSortedOption = (e) => {
+    const { value } = e.target;
+    setTimeout(() => {
+      setSortedOption(value);
+
+      // const URL = correctURL(value);
+      router.push({
+        query: { ...router.query, sort: `sort=${value}`, page: 1 },
+      });
+    }, 1000);
+  };
+
+  const router = useRouter();
+
   return (
     <Grid container spacing={3}>
       <Grid item md={6}>
-        <Typography className=" text-sm">Products [{props.total}]</Typography>
+        <Typography className="text-xs text-slate-600">
+          ผลลัพธ์ทั้งหมด [{props.total}]
+        </Typography>
       </Grid>
       <Grid item md={6}>
         <Box className="flex gap-3 items-center justify-end">
