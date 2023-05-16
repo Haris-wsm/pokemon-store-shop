@@ -79,7 +79,7 @@ const Checkout = (props) => {
         email: data.email,
         address: data.address,
         items: cart,
-        ref_user: props?.profile?._id || "",
+        ref_user: props?.profile?._id || undefined,
       };
 
       const paymentInfo = await postPaymentInfo(payload);
@@ -147,23 +147,27 @@ const Checkout = (props) => {
 export async function getServerSideProps(context) {
   const session = await getSession(context);
 
-  console.log(session);
-
   let profile;
 
   if (session) {
-    const response = await ApiReq.get("/api/auth/user-profile", {
-      headers: {
-        Authorization: `Bearer ${session.access_token}`,
-      },
-    });
+    try {
+      const response = await ApiReq.get("/api/auth/user-profile", {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
 
-    profile = response.data.data;
+      profile = response.data.data;
+
+      return {
+        props: { profile: profile },
+      };
+    } catch (error) {
+      return {
+        props: { profile: null },
+      };
+    }
   }
-
-  return {
-    props: { profile: profile ?? null },
-  };
 }
 
 export default Checkout;
