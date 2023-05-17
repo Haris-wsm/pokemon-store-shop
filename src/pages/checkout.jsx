@@ -168,6 +168,10 @@ export async function getServerSideProps(context) {
       };
     }
   }
+
+  return {
+    props: { profile: null },
+  };
 }
 
 export default Checkout;
