@@ -90,7 +90,7 @@ a {
   position: unset !important;
 }
 .category .react-multiple-carousel__arrow--left {
-  left: calc(8% + 1px) !important;
+  left: 2% !important;
 }
 
 .category .react-multiple-carousel__arrow--right {

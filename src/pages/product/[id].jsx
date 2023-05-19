@@ -209,7 +209,10 @@ const Product = (props) => {
             รายละเอียดสินค้า
           </Typography>
           <Box className="px-2">
-            <div dangerouslySetInnerHTML={{ __html: product.desc }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: product.desc }}
+              className="font-sans"
+            />
           </Box>
         </Box>
       </Box>
