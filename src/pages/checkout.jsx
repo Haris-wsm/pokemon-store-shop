@@ -25,6 +25,10 @@ const Checkout = (props) => {
   const [items, setItems] = useItems();
   const [paymentInfo, setPaymentInfo] = usePayment();
 
+  const [policy, setPolicy] = useState(false);
+
+  console.log(policy);
+
   const router = useRouter();
 
   const handleSetTotal = (val) => {
@@ -53,11 +57,11 @@ const Checkout = (props) => {
     const address = {
       name: data.name,
       lastname: data.lastname,
-      address: data.address,
-      city: data.city,
-      province: data.province,
-      amphoe: data.amphoe,
-      district: data.district,
+      address: "",
+      city: "",
+      province: "",
+      amphoe: "",
+      district: "",
     };
 
     const payload = {
@@ -121,6 +125,8 @@ const Checkout = (props) => {
               register={register}
               errors={errors}
               setValue={setValue}
+              policy={policy}
+              setPolicy={setPolicy}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
@@ -134,9 +140,9 @@ const Checkout = (props) => {
             startIcon={
               loading ? <AutorenewIcon className="animate-spin" /> : ""
             }
-            disabled={loading ? true : false}
+            disabled={loading || !policy ? true : false}
           >
-            ยืนยันที่อยู่
+            ยืนยัน
           </Button>
         </Box>
       </form>

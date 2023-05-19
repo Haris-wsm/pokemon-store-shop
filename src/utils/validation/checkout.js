@@ -16,12 +16,12 @@ export const validationSchema = z
     lastname: z
       .string({ required_error: "นามสกุล" })
       .min(1, { message: "นามสกุลความยาวอย่างน้อย 1 อักขระ" }),
-    address: z.string(),
-    city: z.string().optional(),
-    zip: z.string().optional(),
-    province: z.string().optional(),
-    amphoe: z.string().optional(),
-    district: z.string().optional(),
+    // address: z.string(),
+    // city: z.string().optional(),
+    // zip: z.string().optional(),
+    // province: z.string().optional(),
+    // amphoe: z.string().optional(),
+    // district: z.string().optional(),
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: "อีเมลไม่ถูกต้อง",

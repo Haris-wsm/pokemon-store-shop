@@ -51,7 +51,7 @@ const MyCodes = (props) => {
       renderCell: (params) => {
         return (
           <Typography className="text-slate-600 text-xs">
-            {dayjs(params.row.timeout).format("YYYY-MM-DD HH:mm:ss")}
+            {dayjs(params.row.timeout).format("YYYY-MM-DD")}
           </Typography>
         );
       },

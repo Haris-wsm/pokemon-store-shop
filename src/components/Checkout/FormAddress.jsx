@@ -18,7 +18,7 @@ import React, { useState } from "react";
 import { ProvinceJson } from "@/data/json/province";
 import { ThaiAll } from "@/data/json/thailand";
 
-const FormAddress = ({ register, errors, setValue }) => {
+const FormAddress = ({ register, errors, setValue, setPolicy, policy }) => {
   const [province, setProvince] = useState("");
   const [amphoe, setAmphoe] = useState("");
   const [district, setDistrict] = useState("");
@@ -117,139 +117,49 @@ const FormAddress = ({ register, errors, setValue }) => {
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <TextField
-            name="address"
-            {...register("address")}
-            fullWidth
-            placeholder="ที่อยู่"
-            size="small"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Typography variant="h5" className="text-red-500">
-                    *
-                  </Typography>
-                </InputAdornment>
-              ),
-            }}
-            error={errors.address}
-            helperText={errors.address?.message}
-          />
+          <FormControl>
+            <FormControlLabel
+              control={<Checkbox />}
+              value={policy}
+              onChange={(e) => setPolicy(e.target.checked)}
+              label={
+                <Box className="flex gap-2 flex-wrap">
+                  <Typography className="text-sm">I agree with the</Typography>
+                  <Link
+                    href="/privacy-policy"
+                    className="underline text-sm text-blue-700 hover:text-blue-900"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Privacy Policy
+                  </Link>
+                  <Typography className="text-sm">and</Typography>
+                  <Link
+                    href="/terms-of-service"
+                    className="underline text-sm text-blue-700 hover:text-blue-900"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Terms Of Service
+                  </Link>
+                  <Typography className="text-sm text-red-500">*</Typography>
+                </Box>
+              }
+            />
+
+            {/* <FormHelperText> {errors?.policy?.message}</FormHelperText> */}
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <TextField
-            name="city"
-            {...register("city")}
-            fullWidth
-            placeholder="เมื่อง"
-            size="small"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Typography variant="h5" className="text-red-500">
-                    *
-                  </Typography>
-                </InputAdornment>
-              ),
-            }}
-            error={errors.city}
-            helperText={errors.city?.message}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12} md={4}>
-          <FormControl fullWidth error={errors.province}>
-            <InputLabel
-              variant="standard"
-              htmlFor="uncontrolled-native-province"
-            >
-              จังหวัด
-            </InputLabel>
-            <NativeSelect
-              inputProps={{
-                name: "province",
-                id: "uncontrolled-native-province",
-              }}
-              {...register("province")}
-              value={province}
-              onChange={handleSelectProvince}
-              className="min-w-[220px]"
-              name="province"
-            >
-              <option value="" disabled></option>
-              {ProvinceJson?.map((province) => (
-                <option value={province.name_th}>{province.name_th}</option>
-              ))}
-            </NativeSelect>
-            <FormHelperText> {errors?.province?.message}</FormHelperText>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={12} md={4}>
-          <FormControl fullWidth error={errors.amphoe}>
-            <InputLabel variant="standard" htmlFor="uncontrolled-native-amphoe">
-              อำเภอ
-            </InputLabel>
-            <NativeSelect
-              inputProps={{
-                name: "amphoe",
-                id: "uncontrolled-native-amphoe",
-              }}
-              disabled={province === "" ? true : false}
-              defaultValue=""
-              className="min-w-[220px]"
-              {...register("amphoe")}
-              value={amphoe}
-              onChange={handleSelectAmphoe}
-              name="amphoe"
-            >
-              <option value="" disabled></option>
-              {getAmphoe().map((amphoe) => (
-                <option value={amphoe}>{amphoe}</option>
-              ))}
-            </NativeSelect>
-            <FormHelperText> {errors?.amphoe?.message}</FormHelperText>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={12} md={4}>
-          <FormControl fullWidth error={errors.district}>
-            <InputLabel
-              variant="standard"
-              htmlFor="uncontrolled-native-district"
-            >
-              ตำบล
-            </InputLabel>
-            <NativeSelect
-              inputProps={{
-                name: "district",
-                id: "uncontrolled-native-district",
-              }}
-              disabled={amphoe === "" ? true : false}
-              defaultValue=""
-              className="min-w-[220px]"
-              {...register("district")}
-              value={district}
-              onChange={handleSelectDistrict}
-            >
-              <option value="" disabled></option>
-              {getDistrict().map((district) => (
-                <option value={district}>{district}</option>
-              ))}
-            </NativeSelect>
-            <FormHelperText> {errors?.district?.message}</FormHelperText>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={12} md={4}>
-          <FormControl fullWidth>
-            <TextField
-              name="zip"
-              variant="standard"
-              label="รหัสไปรษณีย์"
-              {...register("zip", { defaultValue: getZipCode() ?? "" })}
-              // {...register("zip")}
-              value={getZipCode(district) ?? ""}
-              error={errors.zip}
-              helperText={errors.zip?.message}
-            />
-          </FormControl>
+          <Box className="space-y-3 my-2">
+            <Typography className="text-slate-700 text-xs underline">
+              หมายเหตุ
+            </Typography>
+            <Typography className="text-slate-700 text-xs">
+              สินค้าเป็นโค้ดสำหรับเติมในเกม pokemon tcg live เท่านั้น
+              ไม่ใช่การ์ดจริง
+            </Typography>
+          </Box>
         </Grid>
       </Grid>
     </Box>
