@@ -12,7 +12,6 @@ const Banner = (props) => {
   const handleGetBannerText = async () => {
     try {
       const response = await ApiReq.get(`/api/website/hero-section`);
-      console.log(response.data.data);
       setText(response.data.data);
     } catch (error) {
       console.log(error);

@@ -14,10 +14,8 @@ const Footer = () => {
   }, []);
 
   const handleGetLinks = async () => {
-    console.log("fired footer");
     try {
       const resposne = await ApiReq.get(`/api/social`);
-      console.log(resposne.data.data);
 
       setSocial(resposne.data.data);
     } catch (error) {
@@ -25,7 +23,6 @@ const Footer = () => {
     }
   };
 
-  console.log(social);
   return (
     <Box className="w-full bg-background-dark flex flex-col justify-center py-5 pb-7">
       <Grid

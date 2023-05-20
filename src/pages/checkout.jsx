@@ -89,7 +89,7 @@ const Checkout = (props) => {
       setPaymentInfo(paymentInfo);
       setCart([]);
       setItems([]);
-      router.replace(`/qrcode/${paymentInfo.orderId}`);
+      router.replace(`/qrcode/${paymentInfo.ref_no}`);
     } catch (error) {
       console.log(error);
       router.push("/view-cart");
