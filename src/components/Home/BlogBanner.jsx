@@ -25,7 +25,7 @@ const BlogBanner = () => {
           variant="h5"
           className="text-white font-semibold text-center"
         >
-          Blog
+          ข้อมูลข่าวสาร
         </Typography>
       </Box>
       <Box className="xs:w-[100%] md:w-4/5 mx-auto">

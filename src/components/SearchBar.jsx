@@ -106,7 +106,9 @@ const SearchBar = (props) => {
     >
       <Box className="p-0 md:p-2.5 bg-white w-4/5 flex justify-between items-center mx-auto">
         <Box className="hidden md:block lg:block">
-          <Image alt="logo" src="/logo.jpg" width={50} height={50} />
+          <Link href="/">
+            <Image alt="logo" src="/logo.jpg" width={50} height={50} />
+          </Link>
         </Box>
         <SearchWrapper className="relative h-[40px] border-1 border-gray-200 rounded-3xl w-full md:w-[40%]">
           <SearchBox

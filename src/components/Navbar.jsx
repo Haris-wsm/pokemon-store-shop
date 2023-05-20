@@ -24,7 +24,6 @@ const Menu = styled(Typography)(({ theme }) => ({}));
 const menus = [
   { name: "Home", link: "/" },
   { name: "About Us", link: "/about-us" },
-  { name: "My Account", link: "/my-account" },
   { name: "Contact Us", link: "/contact-us" },
   { name: "Blog  ", link: "/blog-home" },
 ];
