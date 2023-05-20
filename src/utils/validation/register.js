@@ -15,10 +15,10 @@ export const validationSchema = z.object({
   password: z
     .string({ required_error: "รหัสผ่านจำเป็น" })
     .min(8, { message: "รหัสผ่านความยาวอย่างน้อย 8 ตัว" }),
-  address: z.string(),
-  city: z.string().optional(),
-  zip: z.string().optional(),
-  province: z.string().optional(),
-  amphoe: z.string().optional(),
-  district: z.string().optional(),
+  // address: z.string(),
+  // city: z.string().optional(),
+  // zip: z.string().optional(),
+  // province: z.string().optional(),
+  // amphoe: z.string().optional(),
+  // district: z.string().optional(),
 });
