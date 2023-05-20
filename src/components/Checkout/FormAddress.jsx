@@ -156,9 +156,9 @@ const FormAddress = (props) => {
               value={accept}
               onChange={(e) => setAccept(e.target.checked)}
               label={
-                <Box className="space-y-3 my-2">
+                <Box className="flex gap-3 my-2">
                   <Typography className="text-slate-700 text-sm underline">
-                    ยอมรับข้อเงื่อนไข
+                    ยอมรับข้อเงื่อนไข:
                   </Typography>
                   <Typography className="text-slate-700 text-sm">
                     สินค้าเป็นโค้ดสำหรับเติมในเกม pokemon tcg live เท่านั้น
