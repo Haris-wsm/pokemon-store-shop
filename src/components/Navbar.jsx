@@ -25,7 +25,6 @@ const menus = [
   { name: "Home", link: "/" },
   { name: "About Us", link: "/about-us" },
   { name: "Contact Us", link: "/contact-us" },
-  { name: "Blog  ", link: "/blog-home" },
 ];
 
 const Toolbar = () => {
@@ -64,7 +63,15 @@ const Toolbar = () => {
             <Typography className="text-xs text-gray-500">MENU</Typography>
           </Box>
           <Box>
-            <Image alt="logo" src="/logo.jpg" width={40} height={40} />
+            <Link href="/">
+              <Image
+                alt="logo"
+                src="/logo.png"
+                width={120}
+                height={50}
+                className="object-contain h-auto"
+              />
+            </Link>
           </Box>
           <Box>
             <Link href="/view-cart">
@@ -102,9 +109,6 @@ const Toolbar = () => {
                 About Us
               </ListItem>
               <Divider className="bg-white" />
-              <ListItem onClick={() => handleNavigate("/")}>
-                My Account
-              </ListItem>
               <Divider className="bg-white" />
               <ListItem onClick={() => handleNavigate("/contact-us")}>
                 Contact Us

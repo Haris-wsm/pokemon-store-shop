@@ -107,7 +107,14 @@ const SearchBar = (props) => {
       <Box className="p-0 md:p-2.5 bg-white w-4/5 flex justify-between items-center mx-auto">
         <Box className="hidden md:block lg:block">
           <Link href="/">
-            <Image alt="logo" src="/logo.jpg" width={50} height={50} />
+            <Image
+              alt="logo"
+              src="/logo.png"
+              width={120}
+              height={50}
+              className="object-contain h-auto"
+              priority
+            />
           </Link>
         </Box>
         <SearchWrapper className="relative h-[40px] border-1 border-gray-200 rounded-3xl w-full md:w-[40%]">
@@ -192,6 +199,12 @@ const SearchBar = (props) => {
             {/* <Button startIcon={<PortraitIcon />}></Button> */}
           </Box>
         )}
+        <Box className="hidden md:flex gap-4">
+          <Divider orientation="vertical" flexItem />
+          <Link href="/blog-home">
+            <Typography className="text-xs text-gray-500">ข่าวสาร</Typography>
+          </Link>
+        </Box>
 
         <Link
           href="/view-cart"

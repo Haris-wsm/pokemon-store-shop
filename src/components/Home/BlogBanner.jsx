@@ -11,7 +11,7 @@ const BlogBanner = () => {
 
   const getNewestBlog = async () => {
     try {
-      const resposne = await ApiReq.get("/api/blog/newest");
+      const resposne = await ApiReq.get("/api/blog/pin-page");
 
       setNewBlogList(resposne.data.data);
     } catch (error) {
