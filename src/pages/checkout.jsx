@@ -26,8 +26,7 @@ const Checkout = (props) => {
   const [paymentInfo, setPaymentInfo] = usePayment();
 
   const [policy, setPolicy] = useState(false);
-
-  console.log(policy);
+  const [accept, setAccept] = useState(false);
 
   const router = useRouter();
 
@@ -127,6 +126,8 @@ const Checkout = (props) => {
               setValue={setValue}
               policy={policy}
               setPolicy={setPolicy}
+              accept={accept}
+              setAccept={setAccept}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
@@ -140,7 +141,7 @@ const Checkout = (props) => {
             startIcon={
               loading ? <AutorenewIcon className="animate-spin" /> : ""
             }
-            disabled={loading || !policy ? true : false}
+            disabled={loading || !policy || !accept ? true : false}
           >
             ยืนยัน
           </Button>

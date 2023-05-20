@@ -7,8 +7,6 @@ import {
   FormHelperText,
   Grid,
   InputAdornment,
-  InputLabel,
-  NativeSelect,
   TextField,
   Typography,
 } from "@mui/material";
@@ -18,7 +16,10 @@ import React, { useState } from "react";
 import { ProvinceJson } from "@/data/json/province";
 import { ThaiAll } from "@/data/json/thailand";
 
-const FormAddress = ({ register, errors, setValue, setPolicy, policy }) => {
+const FormAddress = (props) => {
+  const { register, errors, setValue, setPolicy, policy, accept, setAccept } =
+    props;
+
   const [province, setProvince] = useState("");
   const [amphoe, setAmphoe] = useState("");
   const [district, setDistrict] = useState("");
@@ -146,20 +147,27 @@ const FormAddress = ({ register, errors, setValue, setPolicy, policy }) => {
                 </Box>
               }
             />
-
-            {/* <FormHelperText> {errors?.policy?.message}</FormHelperText> */}
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Box className="space-y-3 my-2">
-            <Typography className="text-slate-700 text-xs underline">
-              หมายเหตุ
-            </Typography>
-            <Typography className="text-slate-700 text-xs">
-              สินค้าเป็นโค้ดสำหรับเติมในเกม pokemon tcg live เท่านั้น
-              ไม่ใช่การ์ดจริง
-            </Typography>
-          </Box>
+          <FormControl>
+            <FormControlLabel
+              control={<Checkbox />}
+              value={accept}
+              onChange={(e) => setAccept(e.target.checked)}
+              label={
+                <Box className="space-y-3 my-2">
+                  <Typography className="text-slate-700 text-sm underline">
+                    ยอมรับข้อเงื่อนไข
+                  </Typography>
+                  <Typography className="text-slate-700 text-sm">
+                    สินค้าเป็นโค้ดสำหรับเติมในเกม pokemon tcg live เท่านั้น
+                    ไม่ใช่การ์ดจริง
+                  </Typography>
+                </Box>
+              }
+            />
+          </FormControl>
         </Grid>
       </Grid>
     </Box>
