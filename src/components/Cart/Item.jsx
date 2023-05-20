@@ -18,6 +18,11 @@ const Item = (props) => {
 
   const [items, setItems] = useRecoilState(itemState);
 
+  // Recoil State
+
+  const [cart, setCart] = useRecoilState(cartState);
+  const [cartItems, setCartItems] = useRecoilState(itemState);
+
   const currItem = useMemo(
     () => items.find((item) => item._id === props._id),
     []
@@ -54,12 +59,12 @@ const Item = (props) => {
         item._id === currItem._id ? { ...currItem, qty } : item
       )
     );
+    setCart(
+      cart.map((item) =>
+        item._id === currItem._id ? { ...currItem, qty } : item
+      )
+    );
   };
-
-  // Recoil State
-
-  const [cart, setCart] = useRecoilState(cartState);
-  const [cartItems, setCartItems] = useRecoilState(itemState);
 
   const handleRemoveItem = () => {
     setCart(cart.filter((item) => item._id !== props._id));
@@ -123,7 +128,7 @@ const Item = (props) => {
           <BtnSelect />
         ) : (
           <BtnIncrease
-            qty={qty}
+            qty={props.qty}
             handleUpdateQty={handleUpdateQty}
             max={props.stock}
           />

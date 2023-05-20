@@ -108,7 +108,7 @@ const CartList = () => {
   // Recoil State
 
   const [cart, setCart] = useRecoilState(cartState);
-  const [cartItem, setCartItem] = useRecoilState(itemState);
+  // const [cartItem, setCartItem] = useRecoilState(itemState);
 
   const handleDeleteAll = () => {
     setCart([]);
