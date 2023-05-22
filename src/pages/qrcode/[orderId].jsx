@@ -4,6 +4,7 @@ import PageLayout from "@/components/Layouts/PageLayout";
 import socketInit from "@/socket";
 import ApiReq from "@/utils/axios";
 import { Box, Typography } from "@mui/material";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
@@ -19,6 +20,25 @@ export async function getServerSideProps(context) {
         permanent: false, // Set to true if it's a permanent redirect
       },
     };
+  }
+
+  const session = await getSession(context);
+  let profile = { profile: null };
+
+  if (session) {
+    try {
+      const response = await ApiReq.get("/api/auth/user-profile", {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
+
+      const resData = response.data.data;
+
+      profile = { profile: resData };
+    } catch (error) {
+      profile = { profile: null };
+    }
   }
 
   const response = await ApiReq.get(`/api/orders/${orderId}`);
@@ -55,6 +75,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       info: data,
+      user: { ...profile },
       isTimeout: timeout < now || data.sucesss ? true : false,
     },
   };
@@ -62,6 +83,8 @@ export async function getServerSideProps(context) {
 
 const QrcodeScan = (props) => {
   const { info } = props;
+
+  console.log(props);
 
   const router = useRouter();
   const [_, setPayment] = usePayment();
@@ -82,9 +105,14 @@ const QrcodeScan = (props) => {
     });
 
     socket.current.on("payment-success", (data) => {
-      console.log("Payment success", data);
       setPayment({});
-      router.replace("/");
+
+      if (props.user.profile) {
+        router.replace("/my-codes");
+      } else {
+        router.replace("/");
+      }
+
       toast.success("ชำระสินค้าสำเร็จ");
     });
 
@@ -112,6 +140,7 @@ const QrcodeScan = (props) => {
             src={getStaticURL(info.qrcode_image)}
             width={300}
             height={500}
+            alt="qrcode_image"
             className="h-auto object-cover shadow-md hover:translate-y-[-5px] duration-500"
           />
         </Box>
