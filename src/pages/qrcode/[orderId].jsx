@@ -84,8 +84,6 @@ export async function getServerSideProps(context) {
 const QrcodeScan = (props) => {
   const { info } = props;
 
-  console.log(props);
-
   const router = useRouter();
   const [_, setPayment] = usePayment();
 

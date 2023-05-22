@@ -28,8 +28,6 @@ const Product = (props) => {
 
   const product = props.product;
 
-  console.log(product);
-
   const isAvailable = (data) =>
     data.status === "in-stock" && (data.stock > 0 || data.unused > 0)
       ? true

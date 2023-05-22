@@ -20,7 +20,6 @@ import { useCart } from "@/atom/cartState";
 import { toast } from "react-toastify";
 
 const Product = (props) => {
-  console.log(props);
   // Cart
   const [cartItem, setCartItem] = useCart();
 
