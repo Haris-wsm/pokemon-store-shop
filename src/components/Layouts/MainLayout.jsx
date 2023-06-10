@@ -17,13 +17,13 @@ const MainLayout = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Code Store Fun!</title>
+        <title>DTS STORE</title>
         <meta property="og:url" content="your url" />
         <meta property="og:type" content="website" />
         <meta property="fb:app_id" content="your fb app id" />
         <meta
           property="og:title"
-          content="โค้ดโปเกม่อนการ์ดสุดโปรด เยี่ยมชม!"
+          content="ซื้อขาย ซอง แพ็ค แพค โค้ด pokemon tcg live"
         />
         <meta name="twitter:card" content="summary" />
         <meta

@@ -21,6 +21,7 @@ const ProductList = () => {
       console.log(error);
     }
   };
+
   return (
     <Box className="w-full pb-10 p-2 md:p-5">
       <Grid container spacing={1}>

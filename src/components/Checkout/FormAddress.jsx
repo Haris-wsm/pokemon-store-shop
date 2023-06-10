@@ -13,7 +13,6 @@ import {
 import Link from "next/link";
 import React, { useState } from "react";
 
-import { ProvinceJson } from "@/data/json/province";
 import { ThaiAll } from "@/data/json/thailand";
 
 const FormAddress = (props) => {
@@ -22,42 +21,6 @@ const FormAddress = (props) => {
 
   const [province, setProvince] = useState("");
   const [amphoe, setAmphoe] = useState("");
-  const [district, setDistrict] = useState("");
-  const [zip, setZip] = useState("");
-
-  const handleSelectProvince = (e) => {
-    const { value } = e.target;
-    setProvince(value);
-    setAmphoe("");
-  };
-
-  const handleSelectAmphoe = (e) => {
-    const { value } = e.target;
-    setAmphoe(value);
-    setDistrict("");
-  };
-
-  const handleSelectDistrict = (e) => {
-    const { value } = e.target;
-    setDistrict(value);
-    setValue("zip", `${getZipCode(value)}`);
-  };
-
-  const getDistrict = () => {
-    return ThaiAll.filter((state) => state.amphoe === amphoe).map(
-      (state) => state.district
-    );
-  };
-
-  const getAmphoe = () => {
-    return [
-      ...new Set(
-        ThaiAll?.filter((state) => state.province === province).map(
-          (state) => state.amphoe
-        )
-      ),
-    ];
-  };
 
   const getZipCode = (district) => {
     return ThaiAll.find(

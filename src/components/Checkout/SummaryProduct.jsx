@@ -58,8 +58,8 @@ const SummaryProduct = ({ handleSetTotal }) => {
         </Link>
       </Box>
       <Box className="pt-5">
-        {items.map((item) => (
-          <>
+        {items.map((item, i) => (
+          <Box key={i}>
             <Box className="flex justify-between">
               {/* Image and qty */}
               <Box className="relative mr-6">
@@ -88,7 +88,7 @@ const SummaryProduct = ({ handleSetTotal }) => {
               </Box>
             </Box>
             <Divider className="my-2" />
-          </>
+          </Box>
         ))}
         <Box className="mt-10 text-slate-800 flex flex-col gap-2">
           <Box className=" flex justify-between gap-3">
