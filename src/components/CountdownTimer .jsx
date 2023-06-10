@@ -27,9 +27,7 @@ const CountdownTimer = ({ expiredTime, isExpired }) => {
       .toDate();
 
     const intervalId = setInterval(() => {
-      const now = dayjs()
-        .utcOffset(7 * 60)
-        .toDate();
+      const now = dayjs().tz("Asia/Bangkok").toDate();
 
       const diff = dayjs(expiredDateTime).diff(now);
 
