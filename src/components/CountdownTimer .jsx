@@ -42,6 +42,7 @@ const CountdownTimer = ({ expiredTime, isExpired }) => {
         clearInterval(intervalId);
         setPayment({});
         toast.warn("หมดเวลาชำระเงิน");
+        toast.warn(`${now}`);
         router.replace("/");
       }
     }, 1000);
