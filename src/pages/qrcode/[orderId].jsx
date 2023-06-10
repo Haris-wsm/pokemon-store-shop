@@ -10,6 +10,17 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(duration);
+dayjs.extend(timezone);
+
+dayjs.tz.setDefault("Asia/Bangkok");
+
 export async function getServerSideProps(context) {
   const { orderId } = context.query;
 
@@ -68,9 +79,13 @@ export async function getServerSideProps(context) {
     hour12: false,
   };
 
-  const timeout = new Date(data.timeout).getTime();
-  const bangkokDate = new Date().toLocaleString("en-US", options);
-  const now = new Date(bangkokDate).getTime();
+  const timeout = dayjs(data.timeout)
+    .utcOffset(7 * 60)
+    .toDate()
+    .getTime();
+  // const timeout = new Date(data.timeout).getTime();
+  // const bangkokDate = new Date().toLocaleString("en-US", options);
+  const now = dayjs().tz("Asia/Bangkok").toDate().getTime();
 
   return {
     props: {
