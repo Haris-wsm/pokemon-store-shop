@@ -89,7 +89,7 @@ const Product = (props) => {
             width={mobile ? 178 : 200}
             height={mobile ? 178 : 200}
             className={clsx({
-              ["cursor-pointer hover:drop-shadow-2xl shadow-blue-400  mx-auto"]: true,
+              ["cursor-pointer hover:drop-shadow-2xl shadow-blue-400  mx-auto aspect-square object-contain"]: true,
 
               ["opacity-60"]:
                 props.status === "out-stock" ||

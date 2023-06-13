@@ -11,6 +11,9 @@ const NewReleaseProduct = (props) => {
   const redirectTo = (url) => {
     router.push(url);
   };
+
+  const getDiscountPrice = (data) => Number(data.price) - Number(data.discount);
+
   return (
     <Box
       className={clsx({
@@ -24,15 +27,32 @@ const NewReleaseProduct = (props) => {
         width={70}
         height={70}
         alt="new-releases"
-        className="hover:opacity-75 hover:drop-shadow-2xl"
+        className="hover:opacity-75 hover:drop-shadow-2xl aspect-square object-contain"
       ></Image>
       <Box className="text-center">
         <Typography className="text-xs w-[180px] text-gray-500">
           {props.name}
         </Typography>
-        <Typography className="text-md font-semibold text-gray-600">
+        {/* <Typography className="text-md font-semibold text-gray-600">
           ฿{props.price}
-        </Typography>
+        </Typography> */}
+
+        <Box className="flex justify-center gap-2 text-sm">
+          <Typography
+            className={clsx({
+              ["text-center font-semibold"]: true,
+              ["line-through text-black"]: props.sale,
+              ["text-blue-500"]: !props.sale,
+            })}
+          >
+            ฿{props.price}
+          </Typography>
+          {props.sale && (
+            <Typography className="font-semibold text-red-500 text-sm">
+              ฿{getDiscountPrice(props).toFixed(2)}
+            </Typography>
+          )}
+        </Box>
       </Box>
     </Box>
   );

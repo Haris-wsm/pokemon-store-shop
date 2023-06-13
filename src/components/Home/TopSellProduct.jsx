@@ -9,6 +9,8 @@ const TopSellProduct = (props) => {
 
   const router = useRouter();
   const redirectTo = (url) => router.push(url);
+
+  const getDiscountPrice = (data) => Number(data.price) - Number(data.discount);
   return (
     <Box
       className={clsx({
@@ -22,15 +24,32 @@ const TopSellProduct = (props) => {
         width={props.bestsell ? 200 : 70}
         height={props.bestsell ? 200 : 70}
         alt="tip-sell"
-        className="hover:opacity-75 hover:drop-shadow-2xl"
+        className="hover:opacity-75 hover:drop-shadow-2xl aspect-square object-contain"
       />
       <Box className="text-center">
         <Typography className="text-xs w-[180px] text-gray-500">
           {props.name}
         </Typography>
-        <Typography className="text-md font-semibold text-gray-600">
+        {/* <Typography className="text-md font-semibold text-gray-600">
           ฿{props.price}
-        </Typography>
+        </Typography> */}
+
+        <Box className="flex justify-center gap-2">
+          <Typography
+            className={clsx({
+              ["text-center font-semibold"]: true,
+              ["line-through text-black"]: props.sale,
+              ["text-blue-500"]: !props.sale,
+            })}
+          >
+            ฿{props.price}
+          </Typography>
+          {props.sale && (
+            <Typography className="font-semibold text-red-500">
+              ฿{getDiscountPrice(props).toFixed(2)}
+            </Typography>
+          )}
+        </Box>
       </Box>
     </Box>
   );
