@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import {
   Box,
@@ -16,15 +16,18 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useCart } from "@/atom/cartState";
+import { getSession, signOut } from "next-auth/react";
 
 const NavbarWrapper = styled(Box)(({ theme }) => ({}));
 const Navbar = styled(Box)(({ theme }) => ({}));
 const Menu = styled(Typography)(({ theme }) => ({}));
 
 const menus = [
-  { name: "Home", link: "/" },
   { name: "About Us", link: "/about-us" },
-  { name: "Contact Us", link: "/contact-us" },
+  {
+    name: "Contact Us",
+    link: "https://web.facebook.com/profile.php?id=100049204909367",
+  },
 ];
 
 const Toolbar = () => {
@@ -39,6 +42,28 @@ const Toolbar = () => {
   };
 
   const [cartItem, setCartItem] = useCart();
+
+  // Session
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    getCredentails();
+  }, [router]);
+
+  const getCredentails = async () => {
+    try {
+      const session = await getSession();
+      if (session) {
+        setIsLogin(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const hadleLogout = () => {
+    signOut();
+  };
 
   return (
     <>
@@ -109,7 +134,6 @@ const Toolbar = () => {
                 About Us
               </ListItem>
               <Divider className="bg-white" />
-              <Divider className="bg-white" />
               <ListItem onClick={() => handleNavigate("/contact-us")}>
                 Contact Us
               </ListItem>
@@ -118,6 +142,29 @@ const Toolbar = () => {
                 Blog
               </ListItem>
               <Divider className="bg-white" />
+              {isLogin !== true ? (
+                <>
+                  <ListItem onClick={() => handleNavigate("/my-account")}>
+                    Login
+                  </ListItem>
+                  <Divider className="bg-white" />
+                  <ListItem
+                    onClick={() => handleNavigate("/create-an-account")}
+                  >
+                    Register
+                  </ListItem>
+                  <Divider className="bg-white" />
+                </>
+              ) : (
+                <>
+                  <ListItem onClick={() => handleNavigate("/my-codes")}>
+                    โค้ดของฉัน
+                  </ListItem>
+                  <Divider className="bg-white" />
+                  <ListItem onClick={hadleLogout}>Logout</ListItem>
+                  <Divider className="bg-white" />
+                </>
+              )}
             </List>
           </Box>
         </Drawer>

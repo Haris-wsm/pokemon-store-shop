@@ -13,6 +13,7 @@ import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
 import { useCart } from "@/atom/cartState";
 import { toast } from "react-toastify";
+import Tile from "@/components/TIle";
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
@@ -80,13 +81,15 @@ const Product = (props) => {
         <Grid container spacing={3} className="my-10">
           <Grid item xs={12} sm={12} md={6}>
             <Box className="min-w-[100%] flex md:block justify-center mb-5">
-              <Image
-                width={300}
-                height={455}
-                src={getStaticURL(product.image)}
-                alt="Image-product"
-                className=" h-[auto] pointer-events-none"
-              />
+              <Tile>
+                <Image
+                  width={300}
+                  height={455}
+                  src={getStaticURL(product.image)}
+                  alt="Image-product"
+                  className=" h-[auto] pointer-events-none"
+                />
+              </Tile>
             </Box>
             <Box>
               <CouroselProduct gallery={product.gallery} />

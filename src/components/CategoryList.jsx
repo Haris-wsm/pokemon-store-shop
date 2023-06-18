@@ -11,13 +11,13 @@ import Carousel from "react-multi-carousel";
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
-    items: 10,
-    slidesToSlide: 10, // optional, default to 1.
+    items: 8,
+    slidesToSlide: 2, // optional, default to 1.
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 8,
-    slidesToSlide: 8, // optional, default to 1.
+    slidesToSlide: 2, // optional, default to 1.
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -74,7 +74,13 @@ const CategoryList = () => {
   };
 
   const redirectTo = (name) => {
-    router.push(`/${name}`);
+    if (name === "ON SALE") {
+      router.push(`/on-sale`);
+    } else if (name === "HOME") {
+      router.push(`/`);
+    } else {
+      router.push(`/${name}`);
+    }
   };
 
   return (
@@ -86,46 +92,59 @@ const CategoryList = () => {
       })}
     >
       <Carousel
-        ssr={true}
-        responsive={responsive}
-        autoPlay={matches ? true : false}
-        autoPlaySpeed={5000}
-        transitionDuration={250}
-        containerClass="carousel-container"
+        autoPlay={true}
+        autoPlaySpeed={3000}
+        centerMode={false}
         className="md:w-4/5 w-full sm:w-full lg:w-4/5 mx-auto font-sans category"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        keyBoardControl={true}
+        containerClass="container"
+        dotListClass=""
+        draggable
+        focusOnSelect={false}
+        infinite
         itemClass="carousel-item-padding-40-px"
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        keyBoardControl
+        minimumTouchDrag={80}
+        pauseOnHover
+        renderArrowsWhenDisabled={false}
+        renderButtonGroupOutside={false}
+        renderDotsOutside={false}
+        responsive={responsive}
+        rewind={false}
+        rewindWithAnimation={false}
+        rtl={false}
+        shouldResetAutoplay
+        showDots={false}
+        sliderClass=""
+        slidesToSlide={1}
+        swipeable
+        ssr
       >
-        <Tooltip title="on sale" placement="bottom">
-          <Typography
-            className={clsx({
-              ["cursor-pointer text-xs sm:text-[0.875rem] px-2 xs:px-3 sm:px-3 hover:underline text-center h-[42px] leading-[42px]"]: true,
-              ["bg-[#f35b68]"]: true,
-            })}
-            onClick={() => redirectTo("on-sale")}
-          >
-            ON SALE
-          </Typography>
-        </Tooltip>
-        {categories?.map((category, i) => (
-          <Tooltip
-            title={category.name.toUpperCase()}
-            placement="bottom"
-            key={i}
-          >
-            <Typography
-              className={clsx({
-                ["cursor-pointer text-xs sm:text-[0.875rem] px-2 xs:px-3 sm:px-3 hover:underline text-center h-[42px] leading-[42px]"]: true,
-                ["bg-[#f35b68]"]: matchesWord(category.name, "ON SALE"),
-                ["bg-background-dark"]: !matchesWord(category.name, "ON SALE"),
-              })}
-              onClick={() => redirectTo(category.name)}
-            >
-              {category.name.toUpperCase()}
-            </Typography>
-          </Tooltip>
-        ))}
+        {[{ name: "HOME" }, { name: "ON SALE" }, ...categories]?.map(
+          (category, i) => (
+            <>
+              <Tooltip
+                title={category.name.toUpperCase()}
+                placement="bottom"
+                key={i}
+              >
+                <Typography
+                  className={clsx({
+                    ["cursor-pointer text-xs sm:text-[0.875rem] px-2 xs:px-3 sm:px-3 hover:underline text-center h-[42px] leading-[42px]"]: true,
+                    ["bg-[#f35b68]"]: matchesWord(category.name, "ON SALE"),
+                    ["bg-background-dark"]: !matchesWord(
+                      category.name,
+                      "ON SALE"
+                    ),
+                  })}
+                  onClick={() => redirectTo(category.name)}
+                >
+                  {category.name.toUpperCase()}
+                </Typography>
+              </Tooltip>
+            </>
+          )
+        )}
       </Carousel>
     </Box>
   );

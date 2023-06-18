@@ -89,13 +89,13 @@ a {
 .category.react-multi-carousel-list {
   position: unset !important;
 }
-.category .react-multiple-carousel__arrow--left {
+/* .category .react-multiple-carousel__arrow--left {
   left: 2% !important;
 }
 
 .category .react-multiple-carousel__arrow--right {
   right: calc(8% + 1px) !important;
-}
+} */
 
 /* React Quill Css custom */
 .ql-editor {
@@ -188,4 +188,27 @@ blockquote {
 
 ul {
   padding-left: 2em;
+}
+
+/* tile */
+
+.tilt {
+  display: block;
+  height: auto;
+  width: 300px;
+  margin: 0 auto;
+  transition: box-shadow 0.1s, transform 0.1s;
+
+  /*
+    * Adding image to the background
+    * No relation to the hover effect.
+    */
+  background-image: url(http://unsplash.it/300/200);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.tilt:hover {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
 }
