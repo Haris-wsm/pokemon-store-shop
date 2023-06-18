@@ -13,7 +13,7 @@ import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
 import { useCart } from "@/atom/cartState";
 import { toast } from "react-toastify";
-import Tile from "@/components/TIle";
+import Tile from "@/components/Tile";
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
