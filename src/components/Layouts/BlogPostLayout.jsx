@@ -3,19 +3,6 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const recentPost = [
-  {
-    title:
-      "Counter the Metagame: Arceus VSTAR / Giratina VSTAR / Flying Pikachu VMAX",
-  },
-  {
-    title: "The best Scarlet and Violet deck - Gardevoir ex!",
-  },
-  {
-    title: "Top 10 Scarlet and Violet Cards",
-  },
-];
-
 const BlogPostLayout = (props) => {
   const router = useRouter();
 
