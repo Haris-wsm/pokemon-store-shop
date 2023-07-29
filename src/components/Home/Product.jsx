@@ -97,7 +97,7 @@ const Product = (props) => {
                 props.unused <= 0,
               ["hover:opacity-75"]: props.status === "in-stock",
             })}
-            onClick={() => redirectTo(`/product/${props._id}`)}
+            onClick={() => redirectTo(`/product/${props.name}`)}
           />
           {props.sale && (
             <Box className="absolute top-0 right-0 drop-shadow-md bg-red-500 px-3 py-1 font-sans text-xs text-white">

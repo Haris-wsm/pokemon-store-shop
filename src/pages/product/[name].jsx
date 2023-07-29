@@ -17,8 +17,9 @@ import { toast } from "react-toastify";
 import Tile from "@/components/Tile";
 
 export async function getServerSideProps(context) {
-  const { id } = context.query;
-  const response = await ApiReq.get(`/api/products/${id}`);
+  const { name } = context.query;
+
+  const response = await ApiReq.get(`/api/products/name/${decodeURI(name)}`);
 
   const error = response.data.ok ? false : response.data.message;
 
