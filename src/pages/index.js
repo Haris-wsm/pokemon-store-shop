@@ -4,6 +4,7 @@ import Banner from "@/components/Home/Banner";
 import ProductList from "@/components/Home/ProductList";
 import BlogBanner from "@/components/Home/BlogBanner";
 import ApiReq from "@/utils/axios";
+import TagList from "@/components/TagList";
 
 export async function getServerSideProps(context) {
   const resposnse = await ApiReq.get("/api/banner");
@@ -21,6 +22,7 @@ export default function Home(props) {
         <ProductList />
       </Box>
       <BlogBanner />
+      <TagList />
     </Box>
   );
 }
