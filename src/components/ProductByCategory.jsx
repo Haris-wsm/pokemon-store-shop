@@ -30,7 +30,7 @@ const ProductByCategory = (props) => {
 
       // const URL = correctURL(value);
       router.push({
-        query: { ...router.query, sort: `sort=${value}`, page: 1 },
+        query: { ...router.query, sort: value, page: 1 },
       });
     }, 1000);
   };
