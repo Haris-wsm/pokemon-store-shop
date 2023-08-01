@@ -10,11 +10,15 @@ import ApiReq from "@/utils/axios";
 import CustomPagination from "@/components/Pagination";
 
 export async function getServerSideProps(context) {
-  const { categoryProd, page = 1, limit = 30, sort = "" } = context.query;
+  const { categoryProd, page = 1, limit = 30, sort } = context.query;
 
-  const resposne = await ApiReq.get(
-    `/api/products/category/${categoryProd}?page=${page}&limit=${limit}&${sort}`
-  );
+  let uri = `/api/products/category/${categoryProd}?page=${page}&limit=${limit}`;
+
+  if (sort !== undefined) {
+    uri += `&sort=${sort}`;
+  }
+
+  const resposne = await ApiReq.get(uri);
 
   const error = resposne.data.ok ? false : resposne.data.message;
 

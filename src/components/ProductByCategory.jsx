@@ -2,10 +2,7 @@ import {
   Box,
   FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
   NativeSelect,
-  Select,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
@@ -27,8 +24,6 @@ const ProductByCategory = (props) => {
     const { value } = e.target;
     setTimeout(() => {
       setSortedOption(value);
-
-      // const URL = correctURL(value);
       router.push({
         query: { ...router.query, sort: value, page: 1 },
       });
