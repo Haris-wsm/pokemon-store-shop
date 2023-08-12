@@ -11,18 +11,17 @@ module.exports = {
       fontFamily: {
         sans: ["Prompt", "sans-serif"],
       },
+      keyframes: {
+        marqueeLine: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+
+      animation: {
+        textRun: "marqueeLine 15s ease-in-out infinite 1s",
+      },
     },
-
-    // screens: {
-    //   tablet: "640px",
-    //   // => @media (min-width: 640px) { ... }
-
-    //   laptop: "1024px",
-    //   // => @media (min-width: 1024px) { ... }
-
-    //   desktop: "1280px",
-    //   // => @media (min-width: 1280px) { ... }
-    // },
   },
   corePlugins: {
     preflight: false,

@@ -5,6 +5,7 @@ import ProductList from "@/components/Home/ProductList";
 import BlogBanner from "@/components/Home/BlogBanner";
 import ApiReq from "@/utils/axios";
 import TagList from "@/components/TagList";
+import Announcmennt from "@/components/Announcmennt";
 
 export async function getServerSideProps(context) {
   const resposnse = await ApiReq.get("/api/banner");
@@ -16,6 +17,7 @@ export async function getServerSideProps(context) {
 export default function Home(props) {
   return (
     <Box className="container-wrapper">
+      <Announcmennt />
       <CouroselBanner bannerList={props.banners} />
       <Box className="xs:w-[100%] md:w-full lg:w-4/5 mx-auto">
         <Banner />
