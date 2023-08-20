@@ -17,7 +17,6 @@ export async function getServerSideProps(context) {
 export default function Home(props) {
   return (
     <Box className="container-wrapper">
-      <Announcmennt />
       <CouroselBanner bannerList={props.banners} />
       <Box className="xs:w-[100%] md:w-full lg:w-4/5 mx-auto">
         <Banner />

@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import ScrollToTopFab from "../ScrollToTopFab";
 import CartSticky from "../CartSticky";
 import Head from "next/head";
+import Announcmennt from "../Announcmennt";
 
 const Toolbar = dynamic(import("../Navbar"));
 const SearchBar = dynamic(import("../SearchBar"));
@@ -33,6 +34,7 @@ const MainLayout = ({ children }) => {
         <meta property="og:image" content="/logo.png" />
       </Head>
       <Container>
+        <Announcmennt />
         <Toolbar />
         <SearchBar />
         <CategoryList />

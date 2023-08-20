@@ -27,7 +27,7 @@ const Announcmennt = () => {
   }
 
   return (
-    <Box className="w-full bg-yellow-300 py-5 px-2 overflow-hidden">
+    <Box className="w-full bg-yellow-300 py-3 px-2 overflow-hidden">
       <Box className="flex">
         <Typography className="min-w-full shrink-0 whitespace-nowrap animate-textRun px-[15px]">
           {text}

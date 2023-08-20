@@ -92,7 +92,7 @@ const CategoryList = () => {
       })}
     >
       <Carousel
-        autoPlay={true}
+        autoPlay={false}
         autoPlaySpeed={3000}
         centerMode={false}
         className="md:w-4/5 w-full sm:w-full lg:w-4/5 mx-auto font-sans category"
